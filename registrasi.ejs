@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Peminjaman Buku</title>
+    <link rel="stylesheet" href="/style/stylelogin.css" />
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  </head>
+
+  <script>
+    const socket = io();
+
+    socket.on("data", async ({ uid, block1 }) => {
+      let dataElement = document.getElementById("scan");
+      let uidElement = document.getElementById("uid");
+      dataElement.textContent = `Aktivasi`;
+      uidElement.textContent = `${uid}`;
+    });
+
+    async function Arduino() {
+      let uidElement = document.getElementById("uid");
+      let dataElement = document.getElementById("scan");
+      console.log(dataElement);
+      await fetch("http://localhost:3000/arduinoApi", {
+        method: "POST",
+        body: JSON.stringify({ data:uidElement.textContent }),
+        headers: { "Content-Type": "application/json" },
+      });
+      dataElement.textContent = `Scan kembali RFID dan tunggu beberapa saat`;
+    }
+  </script>
+
+  <body>
+    <div class="container">
+      <input type="checkbox" id="check" />
+      <div class="login form">
+        <header>Registration</header>
+        <div class="input-box">
+          <input type="text" name="nim" placeholder="NIM" required>
+        </div>
+        <div class="input-box">
+          <input type="text" name="nama" placeholder="NAMA" required>
+        </div>
+        <h4 id="scan">Scan RFID terlebih dahulu</h4>
+        <h1 id="uid"></h1><input button type="button" class="button" value="Aktivasi" id="button" onclick="Arduino()">
+      </input>
+      <div class="input-box">
+        <input type="text" name="alamat" placeholder="Alamat" required>
+      </div>
+      <div class="input-box">
+        <input type="text" name="nohp" placeholder="Nomor HP" required>
+      </div>
+      <div class="input-box">
+        <input type="password" name="password" placeholder="Create password" required>
+      </div>
+      <div class="input-box">
+        <input type="password" name="confirm_password" placeholder="Confirm password" required>
+      </div>
+      <input button type="button" class="button" value="Tambah Akun" id="button">
+      </div>
+    </div>
+  </body>
+</html>

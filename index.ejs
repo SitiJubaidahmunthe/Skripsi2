@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pinjam Akun</title>
+    <link rel="stylesheet" href="/style/stylelogin2.css" />
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  </head>
+  <script>
+    // Setelah halaman dimuat
+    document.addEventListener("DOMContentLoaded", function () {
+      // Dapatkan elemen input dengan id "block"
+      const blockInput = document.getElementById("block");
+
+      // Atur atribut readonly setelah halaman dimuat
+      blockInput.setAttribute("readonly", true);
+    });
+    const socket = io();
+    let block4Value;
+    socket.on("data", async ({ uid, block4 }) => {
+      let dataElement = document.getElementById("uid");
+      let block = document.getElementById("block");
+      dataElement.value = uid;
+      block.value = block4;
+    });
+  </script>
+  <body>
+    <div class="wrapper">
+      <h2>Pinjam Buku</h2>
+      <% if (successMessage) { %>
+      <div class="alert alert-success"><%= successMessage %></div>
+      <% } %>
+      <form action="/pinjam" method="POST">
+        <!-- Ubah action menjadi file PHP yang akan menangani insert -->
+        <div class="input-box">
+          <input type="text" name="nim" placeholder="NIM" required />
+        </div>
+        <div class="input-box">
+          <input type="text" name="nama" placeholder="Nama" required />
+        </div>
+        <div class="input-box">
+          <input type="text" id="uid" name="uid" placeholder="Scan" required />
+        <div class="input-box">
+          <input
+            type="text"
+            id="block"
+            name="block"
+            style="display: none"
+            required
+          />
+        </div>
+        </div>
+        <div class="input-box">
+          <input type="text" name="alamat" placeholder="alamat" required />
+        </div>
+        <div class="input-box">
+          <input type="text" name="nohp" placeholder="Nomor Hp" required />
+        </div>
+        <div class="input-box">
+          <input type="text" name="password" placeholder="Password" required />
+        </div>
+        <div class="input-box">
+          <input type="text" name="buku" placeholder="Buku" required />
+        </div>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah</button>
+        <div class="input-box">
+          <input
+            type="date"
+            name="tanggal_peminjaman"
+            placeholder="Tanggal Peminjaman"
+            required
+          />
+        </div>
+        <div class="input-box">
+          <input
+            type="date"
+            name="tanggal_pengembalian"
+            placeholder="Tanggal Pengembalian"
+            required
+          />
+        </div>
+        <div class="input-box button">
+          <input type="submit" value="Pinjam Buku" name="submit" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
