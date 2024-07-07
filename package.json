@@ -1,0 +1,32 @@
+{
+  "name": "siti",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app",
+    "dev": "nodemon app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@serialport/parser-readline": "^12.0.0",
+    "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "crypto-aes-ecb": "^1.2.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mysql2": "^3.10.2",
+    "nodemon": "^3.1.4",
+    "path": "^0.12.7",
+    "pg": "^8.12.0",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2",
+    "serialport": "^12.0.0",
+    "socket.io": "^4.7.5"
+  }
+}
